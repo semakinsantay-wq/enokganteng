@@ -1,0 +1,20 @@
+-- ======================================================
+-- STANDALONE ANTI-AFK (NO GUI)
+-- Extracted from EnochHub v1.4.4
+-- ======================================================
+
+local VirtualUser = game:GetService("VirtualUser")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Fungsi utama untuk mencegah diskoneksi AFK
+LocalPlayer.Idled:Connect(function()
+    -- Menangkap kontrol virtual untuk mensimulasikan aktivitas
+    VirtualUser:CaptureController()
+    -- Mensimulasikan klik kanan pada layar untuk menyegarkan status aktivitas
+    VirtualUser:ClickButton2(Vector2.new())
+    
+    warn("Anti-AFK: Aktivitas disimulasikan pada " .. os.date("%H:%M:%S"))
+end)
+
+print("✅ Anti-AFK Aktif. Anda tidak akan terkena kick karena diam.")
